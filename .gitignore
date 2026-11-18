@@ -1,0 +1,85 @@
+/.local
+/bin
+/obj
+/sdl
+/pkg
+/gfx
+/sfx
+/tools/peresec
+/tools/png2bestpal
+/tools/png2ico
+/tools/pngpal2raw
+/tools/po2ngdat
+/tools/rnctools
+/tools/sndbanker
+/config/fxdata/*.dat
+/config/fxdata/*.fon
+.vs/
+# Build output directories (build/ itself now holds tracked CMake modules under
+# build/cmake/, so ignore only alternative output dirs, not build/).
+/build-*/
+/out/*
+*.cache
+/.vscode/compile_settings.cfg
+/.vscode/game
+/.vscode/launch.json
+/libexterns
+docs/html
+docs/latex
+*.o
+*.d
+*.Tpo
+res/keeperfx_icon.ico
+.header_checksum
+/deps/enet
+/deps/enet6
+/deps/libcurl
+/deps/zlib
+/deps/spng
+/deps/astronomy
+/deps/centijson
+/deps/ffmpeg
+/deps/openal
+/deps/luajit
+/deps/miniupnpc
+/deps/libnatpmp
+/deps/*.tar.gz
+/cppcheck.cache
+/src/ver_defs.h
+keeperfx.log
+crash_log.txt
+debug.log
+.local/
+/keeperfx_vs2010
+#temporary ignore.
+/build/tools
+
+# Personal CMake presets (per-dev deploy path etc.) - see CMakeUserPresets.json.example
+/CMakeUserPresets.json
+
+# macOS fork bootstrap dependencies (fetched by macos/bootstrap-deps.sh)
+/third_party/
+/kfx-deps-src/
+
+# Local release artifacts and Finder metadata
+/outputs/
+.DS_Store
+__pycache__/
+
+# Imported game content and vendor downloads remain local. Existing upstream
+# history is guarded by the source-push policy; export_source.py omits it.
+/data/
+/sound/
+/music/
+/speech/
+/ldata/
+/fxdata/
+/res/
+/campgns/
+/levels/
+/multiplayer/
+/lang/
+/config/
+/save/
+/screenshots/
+/recordings/

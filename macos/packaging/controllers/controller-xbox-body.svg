@@ -1,0 +1,40 @@
+<!-- Adapted from user-supplied MIT-licensed controller artwork. SPDX-License-Identifier: MIT -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="190 150 620 460" width="620" height="460" role="img" aria-labelledby="title desc">
+
+<title id="title">Xbox Series controller</title><desc id="desc">KeeperFX default controller controls. Custom bindings may differ.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif}.body{stroke:#282e2b;stroke-width:3;stroke-linejoin:round}.wire{fill:none;stroke:#ad381d;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}</style>
+<defs><linearGradient id="white" x2="0.2" y2="1"><stop stop-color="#fff" /><stop offset="1" stop-color="#d7d9d4" /></linearGradient><linearGradient id="black" x2="0.4" y2="1"><stop stop-color="#525655" /><stop offset=".55" stop-color="#292d2c" /><stop offset="1" stop-color="#151a17" /></linearGradient><linearGradient id="red" x2=".5" y2="1"><stop stop-color="#eb5849" /><stop offset=".6" stop-color="#c32923" /><stop offset="1" stop-color="#841e1d" /></linearGradient></defs>
+
+
+<rect x="306" y="159" width="91" height="46" rx="13" fill="#252d28" class="body" />
+<rect x="603" y="159" width="91" height="46" rx="13" fill="#252d28" class="body" />
+<text x="351" y="187" fill="#fcfaf4" font-size="18" font-weight="600" text-anchor="middle">LT</text>
+<text x="649" y="187" fill="#fcfaf4" font-size="18" font-weight="600" text-anchor="middle">RT</text>
+<path d="M314 213 C365 193 635 193 686 213 C720 225 738 263 748 310 L784 484 Q800 555 769 577 Q744 595 720 571 L645 491 Q631 478 606 478 H394 Q369 478 355 491 L280 571 Q256 595 231 577 Q200 555 216 484 L252 310 C262 263 280 225 314 213Z" fill="url(#white)" class="body" />
+<path d="M237 563 L355 451 Q376 437 403 437 H597 Q624 437 645 451 L763 563" fill="none" class="" stroke="#b6bcb5" stroke-width="3" />
+<circle cx="337" cy="310" r="42" fill="#a8ada8" class="body" />
+<circle cx="337" cy="310" r="36" fill="#1a1f1c" class="body" />
+<circle cx="337" cy="307" r="28" fill="#343b36" class="body" />
+<path d="M317 298 Q337 281 357 298" fill="none" class="" stroke="#59625a" stroke-width="3" />
+<circle cx="410" cy="417" r="47" fill="#181c1a" class="body" />
+<path d="M395 376 L425 376 V402 H451 V432 H425 V458 H395 V432 H369 V402 H395Z" fill="#343935" class="body" />
+<rect x="396" y="403" width="28" height="28" rx="0" fill="#262c28" class="" />
+<circle cx="588" cy="417" r="42" fill="#a8ada8" class="body" />
+<circle cx="588" cy="417" r="36" fill="#1a1f1c" class="body" />
+<circle cx="588" cy="414" r="28" fill="#343b36" class="body" />
+<path d="M568 405 Q588 388 608 405" fill="none" class="" stroke="#59625a" stroke-width="3" />
+<circle cx="500" cy="249" r="20" fill="#29312b" class="body" />
+<path d="M488 239 Q500 245 512 239 M489 258 Q500 246 511 258" fill="none" class="" stroke="#eef0e9" stroke-width="3" />
+<circle cx="450" cy="301" r="12" fill="#e7e9e1" class="body" />
+<circle cx="550" cy="301" r="12" fill="#e7e9e1" class="body" />
+<circle cx="500" cy="349" r="12" fill="#e7e9e1" class="body" />
+<path d="M444 296h8v7h-8z M448 293h8v7 M544 298h12 M544 302h12 M544 306h12 M494 350v6h12v-6 M500 353v-10m-4 4 4-4 4 4" fill="none" class="" stroke="#525e54" stroke-width="1.8" />
+<circle cx="660" cy="270" r="24" fill="#202823" class="body" />
+<text x="660" y="279" fill="#e1c355" font-size="28" font-weight="600" text-anchor="middle">Y</text>
+<circle cx="620" cy="310" r="24" fill="#202823" class="body" />
+<text x="620" y="319" fill="#5e9cc0" font-size="28" font-weight="600" text-anchor="middle">X</text>
+<circle cx="700" cy="310" r="24" fill="#202823" class="body" />
+<text x="700" y="319" fill="#d76f63" font-size="28" font-weight="600" text-anchor="middle">B</text>
+<circle cx="660" cy="350" r="24" fill="#202823" class="body" />
+<text x="660" y="359" fill="#79b86f" font-size="28" font-weight="600" text-anchor="middle">A</text>
+</svg>

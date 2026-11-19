@@ -63,6 +63,7 @@ class HubTests(unittest.TestCase):
    with self.assertRaises(urllib.error.HTTPError):req('/api/profile',{'public':True})
    self.assertTrue(json.load(req('/api/profile',{'public':True},{'X-CSRF-Token':result['csrf']}))['ok'])
    with self.assertRaises(urllib.error.HTTPError):req('/api/session',headers={'Origin':'http://evil.invalid'})
-   self.assertIn(b'Content',req('/').read()) if False else self.assertIn(b'KeeperFX',req('/').read())
+   with self.assertRaises(urllib.error.HTTPError) as error:req('/')
+   self.assertEqual(error.exception.code,404) # The PHP site owns public pages.
   finally:server.shutdown();server.server_close();t.join()
 if __name__=='__main__':unittest.main()

@@ -615,6 +615,7 @@ class Release:
         return [[py,'macos/tests/test-release-tool.py'],['zsh','macos/build-universal.sh'],
                 [py,'macos/tests/run-ingame-options-tests.py'],[py,'macos/tests/run-controller-tests.py'],
                 [py,'macos/tests/run-readiness-tests.py'],[py,'macos/tests/test-keeperhub.py'],
+                [py,'macos/tests/test-php-web.py'],
                 ['zsh','macos/package-app.sh']]
     def app(self):return self.state/'package/KeeperFX-E.app'
     def verify_package(self):

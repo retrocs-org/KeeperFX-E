@@ -17,6 +17,12 @@
 
 [Upstream KeeperFX website](https://keeperfx.net) | [Keeper Klan Discord](https://discord.gg/hE4p7vy2Hb)
 
+## Community website
+
+The PHP website is in `public-web/`. Run `python3 services/keeperhub/dev.py`
+to start it locally with KeeperHub. See [community setup and PHP hosting](docs/COMMUNITY.md)
+for requirements and deployment configuration.
+
 ## Intro
 KeeperFX (Dungeon Keeper Fan eXpansion) is an open-source project that aims to fix up, enhance and modernize
 the classic dungeon management game, [Dungeon Keeper](https://en.wikipedia.org/wiki/Dungeon_Keeper).

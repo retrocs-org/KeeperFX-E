@@ -286,13 +286,14 @@ class Handler(BaseHTTPRequestHandler):
             require(self.headers.get('Host')==urlsplit(expected).netloc,'Unexpected service host',403)
             require(len(self.headers.get_all('Content-Length',[]))<=1,'Duplicate content length',400)
             route=urlsplit(self.path).path
-            if method=='GET' and not route.startswith('/api/'):
-                name='index.html' if route in ('/','/device','/servers','/profile','/events') or re.fullmatch(r'/keeper/[a-f0-9]{32}',route) else route.lstrip('/')
-                require(name in ('index.html','app.js','style.css'),'Not found',404);p=Path(__file__).parent/name;return self.respond(200,p.read_bytes(),{'html':'text/html; charset=utf-8','js':'text/javascript; charset=utf-8','css':'text/css; charset=utf-8'}[p.suffix[1:]])
+            require(route.startswith('/api/'),'Not found',404)
             require(self.headers.get('Transfer-Encoding') is None,'Chunked requests are unsupported',400);length=int(self.headers.get('Content-Length','0'));require(0<=length<=3*1024*1024,'Request too large',413)
             data=json.loads(self.rfile.read(length) or b'{}') if method=='POST' else {};require(isinstance(data,dict),'Expected an object')
             jar=http.cookies.SimpleCookie();jar.load(self.headers.get('Cookie',''));cookie=jar.get('kfx_session');bearer=self.headers.get('Authorization','');token=bearer[7:] if bearer.startswith('Bearer ') else cookie.value if cookie else ''
-            result=self.server.hub.handle(method,self.path,data,token,self.client_address[0],self.headers.get('X-CSRF-Token',''),bool(cookie and not bearer));set_cookie=None
+            peer=self.client_address[0]
+            if self.server.trust_loopback_proxy and ipaddress.ip_address(peer).is_loopback and self.headers.get('X-KFX-Client-IP'):
+                peer=str(ipaddress.ip_address(self.headers['X-KFX-Client-IP']))
+            result=self.server.hub.handle(method,self.path,data,token,peer,self.headers.get('X-CSRF-Token',''),bool(cookie and not bearer));set_cookie=None
             if route in ('/api/login','/api/register') and 'token' in result:
                 value=result.pop('token');set_cookie='kfx_session='+value+'; HttpOnly; SameSite=Strict; Path=/; Max-Age=2592000'+('; Secure' if expected.startswith('https://') else '')
             if route=='/api/logout':set_cookie='kfx_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'
@@ -302,14 +303,14 @@ class Handler(BaseHTTPRequestHandler):
         except (BrokenPipeError,ConnectionResetError):pass
         except Exception:self.respond(500,{'error':'Service error'})
 
-def serve(hub,host='127.0.0.1',port=8765,origin=None):
-    server=ThreadingHTTPServer((host,port),Handler);server.hub=hub;server.origin=origin or 'http://'+host+':'+str(server.server_port);return server
+def serve(hub,host='127.0.0.1',port=8765,origin=None,trust_loopback_proxy=False):
+    server=ThreadingHTTPServer((host,port),Handler);server.hub=hub;server.trust_loopback_proxy=trust_loopback_proxy;server.origin=origin or 'http://'+host+':'+str(server.server_port);return server
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--db',default='keeperhub.sqlite3');p.add_argument('--bind',default='127.0.0.1');p.add_argument('--port',type=int,default=8765);p.add_argument('--public-host',default='127.0.0.1');p.add_argument('--relay-first',type=int,default=27700);p.add_argument('--relay-last',type=int,default=27731);p.add_argument('--origin');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--db',default='keeperhub.sqlite3');p.add_argument('--bind',default='127.0.0.1');p.add_argument('--port',type=int,default=8765);p.add_argument('--public-host',default='127.0.0.1');p.add_argument('--relay-first',type=int,default=27700);p.add_argument('--relay-last',type=int,default=27731);p.add_argument('--origin');p.add_argument('--trust-loopback-proxy',action='store_true',help='Trust client IP supplied by the local PHP gateway');a=p.parse_args()
     require(a.bind in ('127.0.0.1','::1') or a.origin and a.origin.startswith('https://'),'Non-loopback HTTP requires an HTTPS reverse-proxy origin')
     os.umask(0o077);key=os.environ.get('KFX_HUB_ADMIN_KEY');require(key and len(key)>=24,'Set KFX_HUB_ADMIN_KEY to a random value of at least 24 characters')
-    relay=Relay(a.bind,a.public_host,(a.relay_first,a.relay_last));hub=Hub(a.db,relay,key);server=serve(hub,a.bind,a.port,a.origin);print('KeeperHub local service:',server.origin,flush=True)
+    relay=Relay(a.bind,a.public_host,(a.relay_first,a.relay_last));hub=Hub(a.db,relay,key);server=serve(hub,a.bind,a.port,a.origin,a.trust_loopback_proxy);print('KeeperHub local service:',server.origin,flush=True)
     try:server.serve_forever()
     except KeyboardInterrupt:pass
     finally:server.server_close();relay.close()

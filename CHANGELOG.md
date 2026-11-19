@@ -21,6 +21,8 @@
 - Connection diagnostics, version comparison and direct IPv4 joining.
 
 ### Enhancements
+- Add a new KeeperFX-E landing page and PHP-hosted community website, with a
+  same-origin API gateway and documented Apache/Nginx deployment.
 - Rename the application, website branding and release packages to KeeperFX-E.
 - Configure the retrocs-org GitHub/GitLab repositories and project website.
 - Select and remember an active controller, with automatic Xbox/DualSense labels.
